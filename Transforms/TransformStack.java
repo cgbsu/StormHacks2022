@@ -20,14 +20,14 @@ public class TransformStack
 
     static void renderTransform( Graphics2D g, Transform current )
     {
-        g.translate( current.position.x, current.position.x );
+        g.translate( current.position.x, current.position.y );
         g.rotate( current.orientation, current.position.x, current.position.y );
         current.draw( g );
         if( current.children != null ) {
             for( Transform child : current.children )
                 renderTransform( g, child );
         }
-        g.translate( -current.position.x, -current.position.x );
         g.rotate( -current.orientation, current.position.x, current.position.y );
+        g.translate( -current.position.x, -current.position.y );
     }
 }

@@ -34,7 +34,7 @@ class VirtualPetGraphics extends JPanel implements MouseListener
         super.paintComponent( g );
         g.setColor( backroundColor );
         g.fillRect( 0, 0, getWidth(), getHeight() );
-        doggo.update();
+        //doggo.update();
         TransformStack.render( ( Graphics2D ) g );
         repaint();
         clicked = false;
