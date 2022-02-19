@@ -30,8 +30,10 @@ class VirtualPetGraphics extends JPanel
         g.fillRect( 0, 0, getWidth(), getHeight() );
         doggo.draw( g );
         g.setColor( Color.WHITE );
-        ( (Graphics2D) g ).rotate( ++x % 360, 100, 100 );
+        ( (Graphics2D) g ).rotate( ++x % 360, 50, 50 );
         g.fillRect( 0, 0, 100, 100 );
+        ( (Graphics2D) g ).rotate( -x % 360, 50, 50 );
+        g.fillRect( 200, 200, 100, 100 );
         repaint();
     }
     
