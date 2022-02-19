@@ -9,7 +9,8 @@ public class StormHacks_Main_Thingy
    {
        SwingUtilities.invokeLater(() -> {
            var frame = new JFrame("A simple graphics program");
-           frame.setSize(400, 300);
+           Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+           frame.setSize( (int)screenSize.getWidth() / 2 , (int)screenSize.getHeight() / 2 );
            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
            frame.getContentPane().add(new VirtualPetGraphics(new Doggo(null)), BorderLayout.CENTER);
            frame.setVisible(true);
