@@ -1,29 +1,32 @@
-import java.awt.Graphics2Dl;
-+
-public static class TransformStack
-{
-    ArrayList< Transform > transforms;
+import java.util.ArrayList;
+import java.awt.Graphics2D;
 
-    void initalize() {
+public class TransformStack
+{
+    static ArrayList< Transform > transforms;
+
+    static void initalize() {
         transforms = new ArrayList< Transform >();
     }
 
-    void pushTransform( Transform newTransform ) {
+    static void pushTransform( Transform newTransform ) {
         transforms.add( newTransform );
     }
 
-    void render( Graphics2D g ) {
+    static void render( Graphics2D g ) {
         for( Transform current : transforms )
             renderTransform( g, current );
     }
 
-    void renderTransform( Graphics2D g, Transform current )
+    static void renderTransform( Graphics2D g, Transform current )
     {
 
-        g.rotate( current.orientation, current.position.x, current.position.y )
-        g.draw( g );
-        for( Transform child : current.children )
-            renderTransform( g, child );
+        g.rotate( current.orientation, current.position.x, current.position.y );
+        current.draw( g );
+        if( current.children != null ) {
+            for( Transform child : current.children )
+                renderTransform( g, child );
+        }
         g.rotate( -current.orientation, current.position.x, current.position.y );
     }
 }

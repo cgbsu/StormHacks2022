@@ -11,8 +11,6 @@ class VirtualPetGraphics extends JPanel
 {
     Doggo doggo;
 
-    int x = 0;
-
     public static Color COMMUNISM = Color.RED;
 
     Color backroundColor = COMMUNISM;
@@ -28,13 +26,16 @@ class VirtualPetGraphics extends JPanel
         super.paintComponent( g );
         g.setColor( backroundColor );
         g.fillRect( 0, 0, getWidth(), getHeight() );
-        doggo.draw( g );
-        g.setColor( Color.WHITE );
-        ( (Graphics2D) g ).rotate( ++x % 360, 50, 50 );
-        g.fillRect( 0, 0, 100, 100 );
-        ( (Graphics2D) g ).rotate( -x % 360, 50, 50 );
-        g.fillRect( 200, 200, 100, 100 );
+        doggo.update();
+        TransformStack.render( ( Graphics2D ) g );
         repaint();
+
+        /*For refrence
+        g.setColor( Color.WHITE );
+        ( ( Graphics2D ) g ).rotate( ++x % 360, 50, 50 );
+        g.fillRect( 0, 0, 100, 100 );
+        ( ( Graphics2D ) g ).rotate( -x % 360, 50, 50 );
+        g.fillRect( 200, 200, 100, 100 );*/
     }
     
 }

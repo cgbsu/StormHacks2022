@@ -11,8 +11,11 @@ public abstract class Bone extends Transform
         NONE 
     }
 
+    public Bone( Bone[] children ) {
+        super( children );
+    }
+
     //Describe the bone
-    String name;
     BodyVertical vertical = BodyVertical.NONE;
     BodyHorizontal horizontal = BodyHorizontal.NONE;
 
@@ -23,6 +26,6 @@ public abstract class Bone extends Transform
             fullTitle = vertical.toString() + ".";
         if( horizontal != BodyHorizontal.NONE )
             fullTitle = fullTitle + horizontal.toString() + ".";
-        return ( fullTitle + "name" );
+        return ( fullTitle + name() );
     }
 }
