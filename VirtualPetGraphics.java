@@ -3,8 +3,9 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import javax.swing.SwingUtilities;
-import javax.swing.JFrame;
+import javax.swing.JFrame;   
 import javax.swing.JPanel;
+import java.awt.Graphics2D;
 
 class VirtualPetGraphics extends JPanel
 {
@@ -29,7 +30,8 @@ class VirtualPetGraphics extends JPanel
         g.fillRect( 0, 0, getWidth(), getHeight() );
         doggo.draw( g );
         g.setColor( Color.WHITE );
-        g.fillRect( 0, 0, 100 + (++x), 100 );
+        ( (Graphics2D) g ).rotate( ++x % 360, 100, 100 );
+        g.fillRect( 0, 0, 100, 100 );
         repaint();
     }
     

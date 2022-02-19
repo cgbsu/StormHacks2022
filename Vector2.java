@@ -1,4 +1,3 @@
-// Can't make files during share
 public class Vector2
 {
     public int x;
