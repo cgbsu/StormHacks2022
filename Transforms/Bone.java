@@ -42,4 +42,8 @@ public abstract class Bone extends Transform
             fullTitle = fullTitle + horizontal.toString() + ".";
         return ( fullTitle + name() );
     }
+
+    public static int leftRightScalar( BodyHorizontal horizontal ) {
+        return ( ( horizontal == Bone.BodyHorizontal.LEFT ) ? -1 : 1 );
+    }
 }

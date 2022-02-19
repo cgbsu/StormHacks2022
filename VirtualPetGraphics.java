@@ -6,8 +6,10 @@ import javax.swing.SwingUtilities;
 import javax.swing.JFrame;   
 import javax.swing.JPanel;
 import java.awt.Graphics2D;
+import java.awt.event.*;
+// import java.awt.MouseListener;
 
-class VirtualPetGraphics extends JPanel
+class VirtualPetGraphics extends JPanel implements MouseListener
 {
     Doggo doggo;
 
@@ -16,10 +18,15 @@ class VirtualPetGraphics extends JPanel
     Color backroundColor = COMMUNISM;
 
     int x = 0;
-    public VirtualPetGraphics( Doggo doggo ) {
+
+    int mouseX, mouseY;
+    boolean clicked = false;
+
+    public VirtualPetGraphics() {
         super();
-        this.doggo = doggo;
+        this.doggo = new Doggo( null, this );
         setBackground( backroundColor );
+        addMouseListener( this );
     }
     
     public void paintComponent( Graphics g )
@@ -30,6 +37,7 @@ class VirtualPetGraphics extends JPanel
         doggo.update();
         TransformStack.render( ( Graphics2D ) g );
         repaint();
+        clicked = false;
         
         /*For refrence
         g.setColor( Color.WHITE );
@@ -41,5 +49,30 @@ class VirtualPetGraphics extends JPanel
         g.fillRect( 200, 200, 100, 100 );*/
 
     }
-    
-}
+    @Override
+    public void mouseClicked( MouseEvent e )
+    {
+        System.out.println( "AAAA" );
+        mouseX = e.getX();
+        mouseY = e.getY();
+        System.out.print( mouseX );System.out.print( ", " );System.out.println( mouseY );
+        clicked = true;
+        repaint();
+    }
+    @Override
+    public void mouseExited( MouseEvent e ) {
+        clicked = false;
+    }
+    @Override
+    public void mouseEntered( MouseEvent e ) {
+        clicked = false;
+    }
+    @Override
+    public void mouseReleased( MouseEvent e ) {
+        clicked = false;
+    }
+    @Override
+    public void mousePressed( MouseEvent e ) {
+        // clicked = false;
+    }
+ }

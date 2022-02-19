@@ -20,13 +20,6 @@ public class TransformStack
 
     static void renderTransform( Graphics2D g, Transform current )
     {
-        if( g == null )
-        System.out.println( "g null!!" );
-        if( current == null )
-        System.out.println( "current null!!" );
-        System.out.println( "Transform name " + current.name() );
-        if( current.position == null )
-            System.out.println( "current.position null!!" );
         g.translate( current.position.x, current.position.x );
         g.rotate( current.orientation, current.position.x, current.position.y );
         current.draw( g );

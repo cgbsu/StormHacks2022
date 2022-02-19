@@ -25,7 +25,6 @@ public abstract class Transform
     }
     public Transform( Transform[] children ) {
         this( children, new Vector2( 0, 0 ) );
-        System.out.println( "here " + name() );
     }
     public Transform() {
         this( null );

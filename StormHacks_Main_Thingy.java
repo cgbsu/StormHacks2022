@@ -12,7 +12,7 @@ public class StormHacks_Main_Thingy
            Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
            frame.setSize( (int)screenSize.getWidth() / 2 , (int)screenSize.getHeight() / 2 );
            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-           frame.getContentPane().add(new VirtualPetGraphics(new Doggo(null)), BorderLayout.CENTER);
+           frame.getContentPane().add(new VirtualPetGraphics(), BorderLayout.CENTER);
            frame.setVisible(true);
        });
    }
