@@ -20,6 +20,8 @@ public class Doggo
         }
         public void draw( Graphics2D g )
         {
+            System.out.println( "Paw" );
+
             g.setColor( Color.BLUE );
             int bodyRadius_ = ( int ) bodyRadius;
             g.fillOval( 0, 
@@ -53,6 +55,7 @@ public class Doggo
 
         public void draw( Graphics2D g )
         {
+            System.out.println( "Leg" );
             g.setColor( Color.GREEN );
             int bodyRadius_ = ( int ) bodyRadius;
             g.fillOval( position.x, position.y, ( bodyRadius_ / 5 ), ( bodyRadius_ ) );
@@ -89,6 +92,7 @@ public class Doggo
             float tempScale = 3;
             if( timeSinceClick-- > 0 )
             {
+                System.out.println( "Text" );
                 g.scale( tempScale, tempScale );
                 g.drawString( text, 0, 0 );
                 g.scale( 1.0f / tempScale, 1.0f / tempScale );
@@ -104,6 +108,7 @@ public class Doggo
             this.radius = radius;
         }
         public void draw( Graphics2D g ) {
+            System.out.println( "Bod" );
             g.setColor( Color.ORANGE );
             g.fillOval( 0, 0, ( int ) radius, ( int ) radius );
         }
@@ -127,6 +132,7 @@ public class Doggo
         this.obj.position.y = 100;
         this.textBox = new DoggoTextBox( new Vector2( 10, 10 ), window );
         this.obj.addChild(this.textBox);
+        TransformStack.pushTransform( this.obj );
 
     }
     

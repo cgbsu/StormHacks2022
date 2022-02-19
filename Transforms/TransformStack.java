@@ -20,6 +20,7 @@ public class TransformStack
 
     static void renderTransform( Graphics2D g, Transform current )
     {
+        System.out.println( "<renderTransform " + current.name() + ">" );
         g.translate( current.position.x, current.position.y );
         g.rotate( current.orientation, current.position.x, current.position.y );
         current.draw( g );
@@ -29,5 +30,6 @@ public class TransformStack
         }
         g.rotate( -current.orientation, current.position.x, current.position.y );
         g.translate( -current.position.x, -current.position.y );
+        System.out.println( "</renderTransform " + current.name() + ">" );
     }
 }

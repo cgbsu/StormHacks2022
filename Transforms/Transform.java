@@ -13,7 +13,7 @@ public abstract class Transform
     {
         this.position = position;
         this.orientation = orientation;
-        TransformStack.pushTransform( this );
+        // TransformStack.pushTransform( this );
         this.children = new ArrayList< Transform >();
         if( children != null ) {
             for( Transform child : children )
