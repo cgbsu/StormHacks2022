@@ -17,7 +17,7 @@ public class Doggo
         }
         public void draw( Graphics2D g ) {
             g.setColor( Color.BLUE );
-            g.fillOval( position.x, position.y, 6, 6 );
+            g.fillOval( 0, 0, 6, 6 );
         }
     }
 
@@ -34,7 +34,7 @@ public class Doggo
 
         public void draw( Graphics2D g ) {
             g.setColor( Color.GREEN );
-            g.fillOval( position.x, position.y, 10, 20 );
+            g.fillOval( 0, 0, 10, 20 );
         }
     }
 
@@ -51,12 +51,7 @@ public class Doggo
 
         public void draw( Graphics2D g )
         {
-            Vector2 finalPos = this.position;
-
-            // if (this.parrent != null)
-                // finalPos = Vector2.add(finalPos, );
-
-            g.drawString(text, finalPos.x, finalPos.y);
+            g.drawString(text, 0, 0);
         }
     }
 
@@ -67,7 +62,7 @@ public class Doggo
         }
         public void draw( Graphics2D g ) {
             g.setColor( Color.ORANGE );
-            g.fillOval( position.x, position.y, 100, 100 );
+            g.fillOval( 0, 0, 100, 100 );
         }
         public String name() {
             return "Thiccccc";

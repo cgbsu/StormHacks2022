@@ -27,12 +27,14 @@ public class TransformStack
         System.out.println( "Transform name " + current.name() );
         if( current.position == null )
             System.out.println( "current.position null!!" );
+        g.translate( current.position.x, current.position.x );
         g.rotate( current.orientation, current.position.x, current.position.y );
         current.draw( g );
         if( current.children != null ) {
             for( Transform child : current.children )
                 renderTransform( g, child );
         }
+        g.translate( -current.position.x, -current.position.x );
         g.rotate( -current.orientation, current.position.x, current.position.y );
     }
 }

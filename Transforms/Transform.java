@@ -33,7 +33,7 @@ public abstract class Transform
 
     public abstract String name();
 
-    public abstract void draw ( Graphics2D g );
+    public abstract void draw( Graphics2D g );
 
     public void addChild( Transform obj )
     {
