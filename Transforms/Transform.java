@@ -4,20 +4,28 @@ import java.awt.Graphics2D;
 public abstract class Transform
 {
     public String name;
-    public Transform parrent;
     public ArrayList<Transform> children;
     public Vector2 position;
     public float orientation;
     
 
-    public Transform( Transform[] children )
+    public Transform( Transform[] children, Vector2 position, float orientation )
     {
+        this.position = position;
+        this.orientation = orientation;
         TransformStack.pushTransform( this );
         this.children = new ArrayList< Transform >();
         if( children != null ) {
             for( Transform child : children )
                 this.children.add( child );
         }
+    }
+    public Transform( Transform[] children, Vector2 position ) {
+        this( children, position, 0.0f );
+    }
+    public Transform( Transform[] children ) {
+        this( children, new Vector2( 0, 0 ) );
+        System.out.println( "here " + name() );
     }
     public Transform() {
         this( null );
@@ -29,7 +37,6 @@ public abstract class Transform
 
     public void addChild( Transform obj )
     {
-        obj.parrent = this;
         this.children.add(obj);
     }
 

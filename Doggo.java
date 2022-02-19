@@ -45,6 +45,7 @@ public class Doggo
 
         DoggoTextBox ( Vector2 pos ) {
             super();
+            text = "Test text";
             this.position = pos;
         }
 
@@ -52,25 +53,39 @@ public class Doggo
         {
             Vector2 finalPos = this.position;
 
-            if (this.parrent != null)
-                finalPos = Vector2.add(finalPos, this.parrent.position);
+            // if (this.parrent != null)
+                // finalPos = Vector2.add(finalPos, );
 
             g.drawString(text, finalPos.x, finalPos.y);
         }
     }
 
+    class ThicccBod extends Bone
+    {
+        ThicccBod( Bone[] children ) {
+            super( children );
+        }
+        public void draw( Graphics2D g ) {
+            g.setColor( Color.ORANGE );
+            g.fillOval( position.x, position.y, 100, 100 );
+        }
+        public String name() {
+            return "Thiccccc";
+        }
+    }
+
     public Doggo( Vector2 pos )
     {
-        /*this.obj = new Bone(
+        TransformStack.initalize();
+        this.obj = new ThicccBod(
             new Bone[] {
-                TopLeg( left ), 
+                /*TopLeg( left ), 
                 TopLeg( right), 
                 Head, 
                 BottomLeg( left ), 
-                BottomLeg( right ) 
+                BottomLeg( right ) */
             }
-        );*/
-        this.obj.position = pos;
+        );
         this.textBox = new DoggoTextBox( new Vector2(10, 10) );
         this.obj.addChild(this.textBox);
     }

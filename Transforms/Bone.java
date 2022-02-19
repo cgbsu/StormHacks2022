@@ -11,8 +11,22 @@ public abstract class Bone extends Transform
         NONE 
     }
 
-    public Bone( Bone[] children ) {
+    public Bone( Bone[] children, 
+            BodyHorizontal horizontal, 
+            BodyVertical vertical )
+    {
         super( children );
+        this.vertical = vertical;
+        this.horizontal = horizontal;
+    }
+    public Bone( Bone[] children, BodyHorizontal horizontal ) {
+        this( children, horizontal, BodyVertical.NONE );
+    }
+    public Bone( Bone[] children, BodyVertical vertical ) {
+        this( children, BodyHorizontal.NONE, vertical );
+    }
+    public Bone( Bone[] children ) {
+        this( children, BodyHorizontal.NONE, BodyVertical.NONE );
     }
 
     //Describe the bone
