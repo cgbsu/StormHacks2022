@@ -20,8 +20,6 @@ public class Doggo
         }
         public void draw( Graphics2D g )
         {
-            System.out.println( "Paw" );
-
             g.setColor( Color.BLUE );
             int bodyRadius_ = ( int ) bodyRadius;
             g.fillOval( 0, 
@@ -55,7 +53,6 @@ public class Doggo
 
         public void draw( Graphics2D g )
         {
-            System.out.println( "Leg" );
             g.setColor( Color.GREEN );
             int bodyRadius_ = ( int ) bodyRadius;
             g.fillOval( position.x, position.y, ( bodyRadius_ / 5 ), ( bodyRadius_ ) );
@@ -108,7 +105,6 @@ public class Doggo
             this.radius = radius;
         }
         public void draw( Graphics2D g ) {
-            System.out.println( "Bod" );
             g.setColor( Color.ORANGE );
             g.fillOval( 0, 0, ( int ) radius, ( int ) radius );
         }
