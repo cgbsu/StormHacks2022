@@ -61,7 +61,7 @@ class VirtualPetGraphics extends JPanel implements MouseListener
         int targetDeltaMilli = 1000 / 60;
         int deFloatDeltaTime = (int)(deltaTime * 1000);
 
-        if (deFloatDeltaTime > targetDeltaMilli)
+        if (deFloatDeltaTime > targetDeltaMilli && frameDelay > 0)
             frameDelay--;
         else if (deFloatDeltaTime < targetDeltaMilli)
             frameDelay++;
