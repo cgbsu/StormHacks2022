@@ -1,0 +1,4 @@
+Manifest-Version: 1.1
+Created-By: BSUDreamTeam
+Package-Name: Huan
+Main-Class: StormHacks_Main_Thingy
