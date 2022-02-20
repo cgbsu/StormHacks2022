@@ -120,12 +120,12 @@ public class Doggo
                 System.out.println( "Testing Happy Message Click At: " + globalCoordinates );
 
                 final double DistanceFromCursor = Vector2.add( 
-                            mouseClickCoordinates, 
+                            window.mouseClickCoordinates, 
                             globalCoordinates.negate() 
                         ).magnitude();
                 if( DistanceFromCursor < messageClickAreaRadius )
                 {
-                    timeSinceClick = messageTime;
+                    timeSinceClick = messageDisplayTimeInMilliseconds;
                     text = quoteGen.quoteGrab();
                     System.out.println( "Grabbed quote: " + text );
                 }
@@ -216,9 +216,12 @@ public class Doggo
         float headBob = 0f;
         public void draw( Graphics2D g )
         {
+            float bobSpeed = 6f;
+
             headBob += vpg.deltaTime;
-            int bobAmmount = (int)(Math.sin(headBob) * 10);
-            position = new Vector2(defaultPos.x, defaultPos.y + bobAmmount);
+            int bobAmmount = (int)(Math.sin(headBob * bobSpeed) * 20);
+            int nodAmmount = (int)(Math.cos(headBob * bobSpeed) * 20);
+            position = new Vector2(defaultPos.x + nodAmmount, defaultPos.y + bobAmmount);
             g.setColor( Color.BLUE );
             g.fillOval( 0, 0, headRadius, headRadius );
         }
@@ -259,7 +262,7 @@ public class Doggo
         );
         this.obj.position.x = 200;
         this.obj.position.y = 100;
-        this.textBox = new DoggoTextBox( new Vector2( 10, 10 ), 10, 1000, window );
+        this.textBox = new DoggoTextBox( 90, new Vector2( 10, 10 ), window );
         this.obj.addChild(this.textBox);
         TransformStack.pushTransform( this.obj );
 

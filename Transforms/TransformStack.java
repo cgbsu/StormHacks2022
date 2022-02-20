@@ -37,7 +37,9 @@ public class TransformStack
     }
 
     public static Vector2 getPreviousGraphicsGlobalTranslation() {
-        return new Vector2( previouslyUsedGraphics2D.getTransform().getTranslateX(), 
-                previouslyUsedGraphics2D.getTransform().getTranslateY() );
+        return new Vector2( 
+                ( int ) previouslyUsedGraphics2D.getTransform().getTranslateX(), 
+                ( int ) previouslyUsedGraphics2D.getTransform().getTranslateY() 
+            );
     }
 }
