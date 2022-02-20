@@ -218,7 +218,7 @@ public class Doggo
         {
             float bobSpeed = 6f;
 
-            headBob += vpg.deltaTime;
+            headBob += ToolSet.deltaTime;
             int bobAmmount = (int)(Math.sin(headBob * bobSpeed) * 20);
             int nodAmmount = (int)(Math.cos(headBob * bobSpeed) * 20);
             position = new Vector2(defaultPos.x + nodAmmount, defaultPos.y + bobAmmount);
