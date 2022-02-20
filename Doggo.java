@@ -11,6 +11,8 @@ public class Doggo
     public HappyQuotes quoteGen;
     double bodyRadius = 200;
 
+    EarWiggle earWiggleAnimation;
+
     public VirtualPetGraphics vpg;
 
     class Paw extends Bone
@@ -133,9 +135,11 @@ public class Doggo
                             window.mouseClickCoordinates, 
                             globalCoordinates.negate() 
                         ).magnitude();
-                if( DistanceFromCursor < messageClickAreaRadius ) {
+                if( DistanceFromCursor < messageClickAreaRadius )
+                {
                     timeSinceClick = messageDisplayTimeInMilliseconds;
                     text = quoteGen.quoteGrab();
+                    earWiggleAnimation.Play();
                 }
             }
         }
@@ -149,13 +153,12 @@ public class Doggo
                 nextMessageWaitTime = randomNumberGenerator.nextInt( 3 ) 
                        * randomNumberGenerator.nextInt( 3 ) 
                        * randomNumberGenerator.nextInt( 3 ) * 60 * 1000;
+                earWiggleAnimation.Play();
                 System.out.println( "Message wait time " + nextMessageWaitTime );
                 return true;
             }
-            else {
+            else
                 nextMessageWaitTime -= ToolSet.deltaTime;
-                System.out.println( nextMessageWaitTime );
-            }
             return false;
         }
 
@@ -314,7 +317,7 @@ public class Doggo
             );
         BigBrain head = ( BigBrain ) this.obj.getChildByName( "BigBrain" );
         head.addChild(this.textBox);
-        EarWiggle test = new EarWiggle( 
+        earWiggleAnimation = new EarWiggle( 
                 ( Ear ) head.getChildByName( "LEFT.Ear" ), 
                 ( Ear ) head.getChildByName( "RIGHT.Ear" ) 
             );
