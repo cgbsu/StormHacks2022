@@ -144,16 +144,12 @@ public class Doggo
             earRadius = this.bodyRadius * 2 / 10;
             horizontalScalar = leftRightScalar( this.horizontal );
             isRight = ( horizontalScalar + 1 ) / 2;
-            // position.x = ( isRight * headRadius * 9 / 10 ) - ( headRadius / 4 );// + ( isRight * earRadius / 4 );
-            position.x = ( horizontalScalar * headRadius / 3 );// + ( earRadius );
-            //orientation = 30 * horizontalScalar;
-            System.out.println( "EAR: " + position.x );
+            position.x = ( horizontalScalar * headRadius / 3 ) + ( earRadius );
         }
         public void draw( Graphics2D g )
         {
             g.setColor( Color.GREEN );
             g.fillOval( 0, 0, earLength, earRadius );
-            orientation += .1; //horizontalScalar * .00001;
         }
         public String name() {
             return "Ear";
