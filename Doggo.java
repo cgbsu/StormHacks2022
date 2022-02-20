@@ -185,7 +185,9 @@ public class Doggo
             earRadius = this.bodyRadius * 2 / 10;
             horizontalScalar = leftRightScalar( this.horizontal );
             isRight = ( horizontalScalar + 1 ) / 2;
-            position.x = ( horizontalScalar * headRadius / 3 ) + ( earRadius );
+            position.x = ( ( -1 + isRight ) * earLength / 2 ) + horizontalScalar * earRadius / 2;//( horizontalScalar * headRadius / 3 ) + ( earRadius )
+            position.y = isRight * earRadius / 2;
+            //( horizontalScalar * headRadius / 3 ) + ( earRadius );
         }
         public void draw( Graphics2D g )
         {
@@ -196,7 +198,8 @@ public class Doggo
             return "Ear";
         }
         public Vector2 getAlignedCenter() {
-            return new Vector2( earLength / 2, earRadius / 2 );
+            return new Vector2( earLength, 0 );//earRadius / 2 );
+            //return new Vector2( earLength / 2, earRadius / 2 );
         }
     }
     
