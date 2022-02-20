@@ -248,7 +248,7 @@ public class Doggo
     public Doggo( Vector2 pos, VirtualPetGraphics window )
     {
         TransformStack.initalize();
-        double bodyRadius = 100;
+        double bodyRadius = 200;
         this.obj = new ThicccBod(
             bodyRadius, 
             new Bone[] {
@@ -259,9 +259,9 @@ public class Doggo
                 new BigBrain( bodyRadius )
             }
         );
-        this.obj.position.x = 200;
-        this.obj.position.y = 100;
-        this.textBox = new DoggoTextBox( 90, new Vector2( 120, 0 ), window );
+        this.obj.position.x = 240;
+        this.obj.position.y = 200;
+        this.textBox = new DoggoTextBox( 9 * ( int ) bodyRadius / 10, new Vector2( ( int ) bodyRadius * 6 / 5, 0 ), window );
         this.obj.addChild(this.textBox);
         TransformStack.pushTransform( this.obj );
 
