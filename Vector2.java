@@ -12,5 +12,13 @@ public class Vector2
     public static Vector2 add(Vector2 vecA, Vector2 vecB)
     {
         return new Vector2(vecA.x + vecB.x, vecA.y + vecB.y);
-    } 
+    }
+
+    public double magnitude() {
+        return Math.hypot( ( double ) x, ( double ) y );
+    }
+
+    public String toString() {
+        return "Vector2< " + x + ", " + y + " >";
+    }
 }

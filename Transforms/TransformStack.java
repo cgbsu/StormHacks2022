@@ -5,6 +5,8 @@ public class TransformStack
 {
     static ArrayList< Transform > transforms;
 
+    protected static Graphics2D previouslyUsedGraphics2D;
+
     static void initalize() {
         transforms = new ArrayList< Transform >();
     }
@@ -22,16 +24,20 @@ public class TransformStack
     {
         // System.out.println( "<renderTransform " + current.name() + ">" );
         g.translate( current.position.x, current.position.y );
-        //g.rotate( current.orientation, current.position.x, current.position.y );
         g.rotate( current.orientation, current.getAlignedCenter().x, current.getAlignedCenter().y );
         current.draw( g );
         if( current.children != null ) {
             for( Transform child : current.children )
                 renderTransform( g, child );
         }
-        // g.rotate( -current.orientation, current.position.x, current.position.y );
         g.rotate( -current.orientation, current.getAlignedCenter().x, current.getAlignedCenter().y );
         g.translate( -current.position.x, -current.position.y );
+        previouslyUsedGraphics2D = g;
         // System.out.println( "</renderTransform " + current.name() + ">" );
     }
+
+/*public static Vector2 getPreviousGraphicsGlobalTranslation() {
+        return new Vector2( previouslyUsedGraphics2D.getTransform().getTranslateX(), 
+                previouslyUsedGraphics2D.getTransform().getTranslateY() );
+    }*/
 }

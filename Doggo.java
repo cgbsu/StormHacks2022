@@ -1,12 +1,15 @@
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Color;
+import java.lang.Math;
 
 public class Doggo
 {
     public Transform obj;
     public DoggoTextBox textBox;
     public HappyQuotes quoteGen;
+
+    public VirtualPetGraphics vpg;
 
     class Paw extends Bone
     {
@@ -68,10 +71,13 @@ public class Doggo
         public String text;
         VirtualPetGraphics window;
         int timeSinceClick = 0;
+        int textScale, messageTime, radius;
         HappyQuotes quoteGen = new HappyQuotes();
         
-        DoggoTextBox( Vector2 pos, VirtualPetGraphics window ) {
+        DoggoTextBox( Vector2 pos, int textScale, 
+                    int messageTime, VirtualPetGraphics window ) {
             super();
+            this.messageTime = messageTime;
             text = "Test text";
             this.window = window;
             this.position = pos;
@@ -82,15 +88,20 @@ public class Doggo
         {
             if( window.clicked == true )
             {
-                double x = g.getTransform().getTranslateX();
-                double y = g.getTransform().getTranslateY();
-                System.out.print("X:");System.out.print(x);System.out.print("Y:");System.out.println(y);
-                if( window.mouseX < x + 100 && window.mouseY < y + 100 && window.mouseX > x && window.mouseX > y )
+                // Vector2 globalCoordinates = TransformStack.getPreviousGraphicsGlobalTranslation();
+                // System.out.println("Happy Message: x:" + x + ", y:" + y );
+
+                // Vector2.add( mouseClickCoordinates, globalCoordinates )
+                /*if( window.mouseX < globalX + 100 
+                        && window.mouseY < globalY + 100 
+                        && window.mouseX > globalX 
+                        && window.mouseX > globalY 
+                    )
                 {
-                    timeSinceClick = 1000;
+                    timeSinceClick = messageTime;
                     text = quoteGen.quoteGrab();
                     System.out.println( "Grabbed quote: " + text );
-                }
+                }*/
             }
             float tempScale = 3;
             if( timeSinceClick-- > 0 )
@@ -159,6 +170,7 @@ public class Doggo
         }
     }
     
+    Vector2 defaultPos;
     public class BigBrain extends Bone
     {
     
@@ -173,9 +185,15 @@ public class Doggo
             headRadius = this.bodyRadius * 9 / 10;
             position.x =  this.bodyRadius / 20;
             position.y = -headRadius * 3 / 4;
+            defaultPos = position;
         }
+
+        float headBob = 0f;
         public void draw( Graphics2D g )
         {
+            headBob += vpg.deltaTime;
+            int bobAmmount = (int)(Math.sin(headBob) * 10);
+            position = new Vector2(defaultPos.x, defaultPos.y + bobAmmount);
             g.setColor( Color.BLUE );
             g.fillOval( 0, 0, headRadius, headRadius );
         }
@@ -216,10 +234,11 @@ public class Doggo
         );
         this.obj.position.x = 200;
         this.obj.position.y = 100;
-        this.textBox = new DoggoTextBox( new Vector2( 10, 10 ), window );
+        this.textBox = new DoggoTextBox( new Vector2( 10, 10 ), 10, 1000, window );
         this.obj.addChild(this.textBox);
         TransformStack.pushTransform( this.obj );
 
+        vpg = window;
     }
     
     public void update() {}

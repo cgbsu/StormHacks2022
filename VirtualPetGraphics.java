@@ -27,14 +27,16 @@ class VirtualPetGraphics extends JPanel implements MouseListener
 
     int x = 0;
 
-    int mouseX, mouseY;
+    Vector2 mouseClickCoordinates;
     boolean clicked = false;
 
-    public VirtualPetGraphics() {
+    public VirtualPetGraphics()
+    {
         super();
         this.doggo = new Doggo( null, this );
         setBackground( backroundColor );
         addMouseListener( this );
+        mouseClickCoordinates = new Vector2( 0, 0 );
     }
 
     public void paintComponent( Graphics g )
@@ -89,9 +91,9 @@ class VirtualPetGraphics extends JPanel implements MouseListener
     @Override
     public void mouseClicked( MouseEvent e )
     {
-        mouseX = e.getX();
-        mouseY = e.getY();
-        System.out.print( mouseX );System.out.print( ", " );System.out.println( mouseY );
+        mouseClickCoordinates.x = e.getX();
+        mouseClickCoordinates.y = e.getY();
+        System.out.println( "Mouse Click Detected!: " + mouseClickCoordinates.toString() );
         clicked = true;
         repaint();
     }
