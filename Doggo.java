@@ -68,7 +68,7 @@ public class Doggo
     
     public class DoggoTextBox extends Transform
     {
-        public String text;
+        public String[] text;
         VirtualPetGraphics window;
         int     timeSinceClick, 
                 textScale, 
@@ -106,7 +106,7 @@ public class Doggo
             this.messageDisplayTimeInMilliseconds = messageDisplayTimeInMilliseconds;
             this.textScale = textScale;
             this.messageClickAreaRadius = messageClickAreaRadius;
-            text = "If your seeing this... its probably a bug.";
+            text = new String[]{ "If your seeing this... its probably a bug." };
             this.window = window;
             this.position = position;
         }
@@ -123,17 +123,16 @@ public class Doggo
                             window.mouseClickCoordinates, 
                             globalCoordinates.negate() 
                         ).magnitude();
-                if( DistanceFromCursor < messageClickAreaRadius )
-                {
+                if( DistanceFromCursor < messageClickAreaRadius ) {
                     timeSinceClick = messageDisplayTimeInMilliseconds;
                     text = quoteGen.quoteGrab();
-                    System.out.println( "Grabbed quote: " + text );
                 }
             }
             if( timeSinceClick-- > 0 )
             {
                 g.scale( textScale, textScale );
-                g.drawString( text, 0, 0 );
+                // g.drawString( text, 0, 0 );
+                ToolSet.DrawMultilineText( g, text, 0, 0 );
                 g.scale( 1.0f / textScale, 1.0f / textScale );
             }
         }
