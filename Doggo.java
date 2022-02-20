@@ -133,17 +133,24 @@ public class Doggo
 
     public class Ear extends Bone
     {
-        int bodyRadius, earLength, earRadius;
+        int bodyRadius, earLength, earRadius, headRadius, horizontalScalar;
         Ear( double bodyRadius, Bone.BodyHorizontal horizontal )
         {
             super( null );
             this.bodyRadius = ( int ) bodyRadius;
-            earLength = this.bodyRadius * 4 / 5;
-            earRadius = this.bodyRadius / 10;
+            this.horizontal = horizontal;
+            headRadius = this.bodyRadius * 9 / 10;
+            earLength = this.bodyRadius * 5 / 10;
+            earRadius = this.bodyRadius * 2 / 10;
+            horizontalScalar = leftRightScalar( this.horizontal );
+            int isRight = ( horizontalScalar + 1 ) / 2;
+            position.x = ( isRight * headRadius * 9 / 10 ) - ( headRadius / 4 );// + ( isRight * earRadius / 4 );
+            // orientation = 30 * horizontalScalar;
+            System.out.println( "EAR: " + position.x );
         }
         public void draw( Graphics2D g )
         {
-            g.setColor( Color.BLUE );
+            g.setColor( Color.GREEN );
             g.fillOval( 0, 0, earLength, earRadius );
         }
         public String name() {
