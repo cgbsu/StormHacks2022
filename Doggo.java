@@ -8,6 +8,7 @@ public class Doggo
     public Transform obj;
     public DoggoTextBox textBox;
     public HappyQuotes quoteGen;
+    double bodyRadius = 200;
 
     public VirtualPetGraphics vpg;
 
@@ -75,13 +76,15 @@ public class Doggo
                 messageDisplayTimeInMilliseconds, 
                 messageClickAreaRadius;
         HappyQuotes quoteGen = new HappyQuotes();
-        
+        Vector2 textPosition;
+
         public static final int DefaultTextScaleFinal = 2;
         public static final int DefaultMessageDisplayTimeInMilliseciondsFinal = 3000;
 
         DoggoTextBox( 
                 int messageClickAreaRadius, 
                 Vector2 position, 
+                Vector2 textPosition, 
                 VirtualPetGraphics window 
             )
         {
@@ -90,6 +93,7 @@ public class Doggo
                     DefaultMessageDisplayTimeInMilliseciondsFinal, 
                     messageClickAreaRadius, 
                     position, 
+                    textPosition, 
                     window 
                 );
         }
@@ -99,6 +103,7 @@ public class Doggo
                 int messageDisplayTimeInMilliseconds, 
                 int messageClickAreaRadius, 
                 Vector2 position, 
+                Vector2 textPosition, 
                 VirtualPetGraphics window 
             ) 
         {
@@ -109,6 +114,7 @@ public class Doggo
             text = new String[]{ "If your seeing this... its probably a bug." };
             this.window = window;
             this.position = position;
+            this.textPosition = textPosition;
         }
         public String name() { return "Doggo_Textbox"; }
 
@@ -132,7 +138,7 @@ public class Doggo
             {
                 g.scale( textScale, textScale );
                 // g.drawString( text, 0, 0 );
-                ToolSet.DrawMultilineText( g, text, 0, 0 );
+                ToolSet.DrawMultilineText( g, text, textPosition.x, textPosition.y );
                 g.scale( 1.0f / textScale, 1.0f / textScale );
             }
         }
@@ -245,10 +251,9 @@ public class Doggo
         }
     }
 
-    public Doggo( Vector2 pos, VirtualPetGraphics window )
+    public Doggo( double bodyRadius, VirtualPetGraphics window )
     {
         TransformStack.initalize();
-        double bodyRadius = 200;
         this.obj = new ThicccBod(
             bodyRadius, 
             new Bone[] {
@@ -261,8 +266,13 @@ public class Doggo
         );
         this.obj.position.x = 240;
         this.obj.position.y = 200;
-        this.textBox = new DoggoTextBox( 9 * ( int ) bodyRadius / 10, new Vector2( ( int ) bodyRadius * 6 / 5, 0 ), window );
-        this.obj.addChild(this.textBox);
+        this.textBox = new DoggoTextBox( 
+                9 * ( int ) bodyRadius / 10, 
+                new Vector2( 0, 0 ), 
+                new Vector2( ( int ) bodyRadius * 3 / 5, 0 ), 
+                window 
+            );
+        this.obj.getChildByName( "BigBrain" ).addChild(this.textBox);
         TransformStack.pushTransform( this.obj );
 
         vpg = window;

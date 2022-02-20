@@ -31,9 +31,12 @@ class VirtualPetGraphics extends JPanel implements MouseListener
     Vector2 mouseClickCoordinates;
     boolean clicked = false;
 
+
+    double doggoBodyRadius = 200;
+
     public VirtualPetGraphics() {
         super();
-        this.doggo = new Doggo( null, this );
+        this.doggo = new Doggo( doggoBodyRadius, this );
         setBackground( backroundColor );
         addMouseListener( this );
         mouseClickCoordinates = new Vector2( 0, 0 );
