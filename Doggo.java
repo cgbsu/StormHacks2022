@@ -191,9 +191,12 @@ public class Doggo
         float headBob = 0f;
         public void draw( Graphics2D g )
         {
+            float bobSpeed = 6f;
+
             headBob += vpg.deltaTime;
-            int bobAmmount = (int)(Math.sin(headBob) * 10);
-            position = new Vector2(defaultPos.x, defaultPos.y + bobAmmount);
+            int bobAmmount = (int)(Math.sin(headBob * bobSpeed) * 20);
+            int nodAmmount = (int)(Math.cos(headBob * bobSpeed) * 20);
+            position = new Vector2(defaultPos.x + nodAmmount, defaultPos.y + bobAmmount);
             g.setColor( Color.BLUE );
             g.fillOval( 0, 0, headRadius, headRadius );
         }
