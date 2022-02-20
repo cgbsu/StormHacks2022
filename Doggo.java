@@ -2,6 +2,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Color;
 import java.lang.Math;
+import java.util.Random;
 
 public class Doggo
 {
@@ -74,9 +75,11 @@ public class Doggo
         int     timeSinceClick, 
                 textScale, 
                 messageDisplayTimeInMilliseconds, 
-                messageClickAreaRadius;
+                messageClickAreaRadius, 
+                nextMessageWaitTime;
         HappyQuotes quoteGen = new HappyQuotes();
         Vector2 textPosition;
+        Random randomNumberGenerator;
 
         public static final int DefaultTextScaleFinal = 2;
         public static final int DefaultMessageDisplayTimeInMilliseciondsFinal = 3000;
@@ -115,10 +118,11 @@ public class Doggo
             this.window = window;
             this.position = position;
             this.textPosition = textPosition;
+            randomNumberGenerator = new Random();
         }
         public String name() { return "Doggo_Textbox"; }
 
-        public void draw( Graphics2D g )
+        void selectQuoteOnClick()
         {
             if( window.clicked == true )
             {
@@ -134,6 +138,31 @@ public class Doggo
                     text = quoteGen.quoteGrab();
                 }
             }
+        }
+
+        boolean selectQuoteOnTime()
+        {
+            if( nextMessageWaitTime <= 0 && timeSinceClick <= 0 )
+            {
+                timeSinceClick = messageDisplayTimeInMilliseconds;
+                text = quoteGen.quoteGrab();
+                nextMessageWaitTime = randomNumberGenerator.nextInt( 3 ) 
+                       * randomNumberGenerator.nextInt( 3 ) 
+                       * randomNumberGenerator.nextInt( 3 ) * 60 * 1000;
+                System.out.println( "Message wait time " + nextMessageWaitTime );
+                return true;
+            }
+            else {
+                nextMessageWaitTime -= ToolSet.deltaTime;
+                System.out.println( nextMessageWaitTime );
+            }
+            return false;
+        }
+
+        public void draw( Graphics2D g )
+        {
+            selectQuoteOnTime();
+            selectQuoteOnClick();
             if( timeSinceClick-- > 0 )
             {
                 g.scale( textScale, textScale );

@@ -1,19 +1,19 @@
 public class EarWiggle extends Animation
 {
 
-    public static final float DefaultMaxTimeFinal = 2.0f * ( float ) Math.PI;
-    public static final float DefaultMaxAngleFinal = ( float ) Math.PI / 4.0f;
+    public static final float DefaultMaxTimeFinal = 2.0f;
+    public static final float DefaultSpeedFinal = 10.0f;
     float time, maxTime, speedScalar;
     public float originalAngle;
     Doggo.Ear left, right;
 
-    public void initalize( Doggo.Ear left, Doggo.Ear right, float maxTime )
+    public void initalize( Doggo.Ear left, Doggo.Ear right, float maxTime, float speedScalar )
     {
         this.left = left;
         this.right = right;
         this.maxTime = maxTime;
+        this.speedScalar = speedScalar;
         originalAngle = this.left.orientation;
-        speedScalar = -1.0f;
         Play();
     }
 
@@ -39,32 +39,33 @@ public class EarWiggle extends Animation
         this.right.initalize();
     }
 
-    public EarWiggle( Doggo.Ear left, Doggo.Ear right, float maxTime ) {
-        initalize( left, right, maxTime );
+    public EarWiggle( Doggo.Ear left, Doggo.Ear right, float maxTime, float speedScalar ) {
+        initalize( left, right, maxTime, speedScalar );
     }
     
-    public EarWiggle( Doggo.Ear left, Doggo.Ear right ) {
-        initalize( left, right, DefaultMaxTimeFinal );
+    public EarWiggle( Doggo.Ear left, Doggo.Ear right, float maxTime ) {
+        initalize( left, right, maxTime, DefaultSpeedFinal );
     }
+
+    public EarWiggle( Doggo.Ear left, Doggo.Ear right ) {
+        initalize( left, right, DefaultMaxTimeFinal, DefaultSpeedFinal );
+    }
+
 
     public String name() {
         return "EarWiggle";
     }
-    public float speed()
-    {
-        return 10.0f;
+    public float speed() {
+        return speedScalar;
     }
 
     public void OnUpdate( float deltaTime )
     {
         time += deltaTime;
-        //time = time % maxTime;
-        // 
-        // left.ThisTranslate( ( originalAngle - left.orientation ), speed() * deltaTime );
-        //right.ThisTranslate( Math.sin(time * 3) * 4, deltaTime );
-        right.orientation = ( float ) (Math.sin(speed() * time * 3.0f) * 0.2f) + 180;//( float ) (Math.PI + ( Math.PI / 2.0f ) );//270;
+        //Magic numbers :D//
+        right.orientation = ( float ) ( Math.sin( speed() * time * 3.0f ) * 0.2f ) + 180;
         left.orientation = -right.orientation + ( float ) Math.PI ;
-        if (time >= 2)
+        if (time >= maxTime)
         {
             this.Pause();
             time = 0f;
