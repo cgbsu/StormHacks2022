@@ -13,6 +13,7 @@ import java.time.*;
 class VirtualPetGraphics extends JPanel implements MouseListener
 {
     Doggo doggo;
+    Treats treats;
 
     Clock cluck = Clock.systemDefaultZone();
     long lastFrameMillis = cluck.millis();
@@ -37,6 +38,8 @@ class VirtualPetGraphics extends JPanel implements MouseListener
     public VirtualPetGraphics() {
         super();
         this.doggo = new Doggo( doggoBodyRadius, this );
+        this.treats = new Treats( this, new Vector2( 800, 300 ), new Vector2( 75, 100 ), 100 );
+        TransformStack.pushTransform( this.treats );
         setBackground( backroundColor );
         addMouseListener( this );
         mouseClickCoordinates = new Vector2( 0, 0 );
@@ -50,7 +53,7 @@ class VirtualPetGraphics extends JPanel implements MouseListener
         super.paintComponent( g );
         g.setColor( backroundColor );
         g.fillRect( 0, 0, getWidth(), getHeight() );
-        //doggo.update();
+        doggo.update();
         TransformStack.render( ( Graphics2D ) g );
         repaint();
         clicked = false;

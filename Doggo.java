@@ -11,7 +11,10 @@ public class Doggo
     public HappyQuotes quoteGen;
     double bodyRadius = 200;
 
+    public Animation[] animations;
+
     EarWiggle earWiggleAnimation;
+    WiggleArms wiggleArms;
 
     public VirtualPetGraphics vpg;
 
@@ -243,7 +246,6 @@ public class Doggo
         }
     }
     
-    Vector2 defaultPos;
     public class BigBrain extends Bone
     {
     
@@ -258,18 +260,10 @@ public class Doggo
             headRadius = this.bodyRadius * 9 / 10;
             position.x =  this.bodyRadius / 20;
             position.y = -headRadius * 3 / 4;
-            defaultPos = position;
         }
 
-        float headBob = 0f;
         public void draw( Graphics2D g )
         {
-            float bobSpeed = 6f;
-
-            headBob += ToolSet.deltaTime;
-            int bobAmmount = (int)(Math.sin(headBob * bobSpeed) * 20);
-            int nodAmmount = (int)(Math.cos(headBob * bobSpeed) * 20);
-            position = new Vector2(defaultPos.x + nodAmmount, defaultPos.y + bobAmmount);
             g.setColor( Color.BLUE );
             g.fillOval( 0, 0, headRadius, headRadius );
         }
@@ -315,15 +309,34 @@ public class Doggo
                 new Vector2( ( int ) bodyRadius * 3 / 5, 0 ), 
                 window 
             );
+
         BigBrain head = ( BigBrain ) this.obj.getChildByName( "BigBrain" );
         head.addChild(this.textBox);
         earWiggleAnimation = new EarWiggle( 
                 ( Ear ) head.getChildByName( "LEFT.Ear" ), 
                 ( Ear ) head.getChildByName( "RIGHT.Ear" ) 
             );
+        wiggleArms = new WiggleArms( 
+                ( TopLeg ) obj.getChildByName( "LEFT.Doggo_TopLeg" ), 
+                ( TopLeg ) obj.getChildByName( "RIGHT.Doggo_TopLeg" ) 
+            );
+        animations = new Animation[] { wiggleArms, earWiggleAnimation, 
+            new HeadNod(head), new HeadCircle(head) };
+
         TransformStack.pushTransform( this.obj );
-        vpg = window;
+            vpg = window;
+        
     }
     
-    public void update() {}
+    float timer = 0f;
+    Random rIsForRandom = new Random();
+    public void update() 
+    {
+        timer -= ToolSet.deltaTime;
+        if (timer > 0f)
+            return;
+
+        timer = 30 + rIsForRandom.nextInt(30);
+        animations[rIsForRandom.nextInt(3)].Play();
+    }
 }
