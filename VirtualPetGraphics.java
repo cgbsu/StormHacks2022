@@ -84,8 +84,6 @@ class VirtualPetGraphics extends JPanel implements MouseListener
         deltaTime = (float)deltaTimeLong * 0.001f;
 
         lastFrameMillis = currentMillis;
-
-        System.out.println(deltaTime);
     }
 
     @Override
