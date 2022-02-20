@@ -19,7 +19,6 @@ public class DoABarrelRoll extends Animation
     {
         angle += deltaTime * 4;
         doggoObj.orientation = angle;
-        System.out.println(angle);
         if (angle >= 6.3f)
         {
             angle = 0f;
