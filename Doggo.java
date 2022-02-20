@@ -261,7 +261,7 @@ public class Doggo
         );
         this.obj.position.x = 200;
         this.obj.position.y = 100;
-        this.textBox = new DoggoTextBox( 90, new Vector2( 10, 10 ), window );
+        this.textBox = new DoggoTextBox( 90, new Vector2( 120, 0 ), window );
         this.obj.addChild(this.textBox);
         TransformStack.pushTransform( this.obj );
 

@@ -55,7 +55,7 @@ public class HappyQuotes {
             lineBuffer.clear();
             lineFormingBuffer.clear();
             String line = inputStream.nextLine();
-            String[] words = line.split( "\\W+" );
+            String[] words = line.split( "[^\\w!-?]+" );
             int characterLength = 0;
             for( int i = 0; i < words.length; ++i )
             {
