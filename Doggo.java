@@ -129,11 +129,11 @@ public class Doggo
             g.setColor( Color.GRAY );
             g.fillOval( 0, 0, legRadius, legRadius );
         }    
-    }    
+    }
 
     public class Ear extends Bone
     {
-        int bodyRadius, earLength, earRadius, headRadius, horizontalScalar;
+        int bodyRadius, earLength, earRadius, headRadius, horizontalScalar, isRight;
         Ear( double bodyRadius, Bone.BodyHorizontal horizontal )
         {
             super( null );
@@ -143,18 +143,23 @@ public class Doggo
             earLength = this.bodyRadius * 5 / 10;
             earRadius = this.bodyRadius * 2 / 10;
             horizontalScalar = leftRightScalar( this.horizontal );
-            int isRight = ( horizontalScalar + 1 ) / 2;
-            position.x = ( isRight * headRadius * 9 / 10 ) - ( headRadius / 4 );// + ( isRight * earRadius / 4 );
-            // orientation = 30 * horizontalScalar;
+            isRight = ( horizontalScalar + 1 ) / 2;
+            // position.x = ( isRight * headRadius * 9 / 10 ) - ( headRadius / 4 );// + ( isRight * earRadius / 4 );
+            position.x = ( horizontalScalar * headRadius / 3 );// + ( earRadius );
+            //orientation = 30 * horizontalScalar;
             System.out.println( "EAR: " + position.x );
         }
         public void draw( Graphics2D g )
         {
             g.setColor( Color.GREEN );
             g.fillOval( 0, 0, earLength, earRadius );
+            orientation += .1; //horizontalScalar * .00001;
         }
         public String name() {
             return "Ear";
+        }
+        public Vector2 getAlignedCenter() {
+            return new Vector2( earLength / 2, earRadius / 2 );
         }
     }
     

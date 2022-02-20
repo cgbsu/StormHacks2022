@@ -39,6 +39,10 @@ public abstract class Transform
         this.children.add(obj);
     }
 
+    public Vector2 getAlignedCenter() {
+        return new Vector2( 0, 0 );
+    }
+
     public Transform getChildByName(String name)
     {
         for ( Transform child : children )

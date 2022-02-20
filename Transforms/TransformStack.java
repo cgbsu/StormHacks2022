@@ -22,13 +22,15 @@ public class TransformStack
     {
         // System.out.println( "<renderTransform " + current.name() + ">" );
         g.translate( current.position.x, current.position.y );
-        g.rotate( current.orientation, current.position.x, current.position.y );
+        //g.rotate( current.orientation, current.position.x, current.position.y );
+        g.rotate( current.orientation, current.getAlignedCenter().x, current.getAlignedCenter().y );
         current.draw( g );
         if( current.children != null ) {
             for( Transform child : current.children )
                 renderTransform( g, child );
         }
-        g.rotate( -current.orientation, current.position.x, current.position.y );
+        // g.rotate( -current.orientation, current.position.x, current.position.y );
+        g.rotate( -current.orientation, current.getAlignedCenter().x, current.getAlignedCenter().y );
         g.translate( -current.position.x, -current.position.y );
         // System.out.println( "</renderTransform " + current.name() + ">" );
     }
