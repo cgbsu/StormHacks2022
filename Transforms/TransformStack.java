@@ -36,8 +36,8 @@ public class TransformStack
         // System.out.println( "</renderTransform " + current.name() + ">" );
     }
 
-/*public static Vector2 getPreviousGraphicsGlobalTranslation() {
+    public static Vector2 getPreviousGraphicsGlobalTranslation() {
         return new Vector2( previouslyUsedGraphics2D.getTransform().getTranslateX(), 
                 previouslyUsedGraphics2D.getTransform().getTranslateY() );
-    }*/
+    }
 }

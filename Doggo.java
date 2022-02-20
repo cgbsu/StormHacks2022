@@ -70,17 +70,45 @@ public class Doggo
     {
         public String text;
         VirtualPetGraphics window;
-        int timeSinceClick = 0;
-        int textScale, messageTime, radius;
+        int     timeSinceClick, 
+                textScale, 
+                messageDisplayTimeInMilliseconds, 
+                messageClickAreaRadius;
         HappyQuotes quoteGen = new HappyQuotes();
         
-        DoggoTextBox( Vector2 pos, int textScale, 
-                    int messageTime, VirtualPetGraphics window ) {
+        public static final int DefaultTextScaleFinal = 3;
+        public static final int DefaultMessageDisplayTimeInMilliseciondsFinal = 3000;
+
+        DoggoTextBox( 
+                int messageClickAreaRadius, 
+                Vector2 position, 
+                VirtualPetGraphics window 
+            )
+        {
+            this( 
+                    DefaultTextScaleFinal, 
+                    DefaultMessageDisplayTimeInMilliseciondsFinal, 
+                    messageClickAreaRadius, 
+                    position, 
+                    window 
+                );
+        }
+
+        DoggoTextBox( 
+                int textScale, 
+                int messageDisplayTimeInMilliseconds, 
+                int messageClickAreaRadius, 
+                Vector2 position, 
+                VirtualPetGraphics window 
+            ) 
+        {
             super();
-            this.messageTime = messageTime;
+            this.messageDisplayTimeInMilliseconds = messageDisplayTimeInMilliseconds;
+            this.textScale = textScale;
+            this.messageClickAreaRadius = messageClickAreaRadius;
             text = "Test text";
             this.window = window;
-            this.position = pos;
+            this.position = position;
         }
         public String name() { return "Doggo_Textbox"; }
 
@@ -88,28 +116,25 @@ public class Doggo
         {
             if( window.clicked == true )
             {
-                // Vector2 globalCoordinates = TransformStack.getPreviousGraphicsGlobalTranslation();
-                // System.out.println("Happy Message: x:" + x + ", y:" + y );
+                Vector2 globalCoordinates = TransformStack.getPreviousGraphicsGlobalTranslation();
+                System.out.println( "Testing Happy Message Click At: " + globalCoordinates );
 
-                // Vector2.add( mouseClickCoordinates, globalCoordinates )
-                /*if( window.mouseX < globalX + 100 
-                        && window.mouseY < globalY + 100 
-                        && window.mouseX > globalX 
-                        && window.mouseX > globalY 
-                    )
+                final double DistanceFromCursor = Vector2.add( 
+                            mouseClickCoordinates, 
+                            globalCoordinates.negate() 
+                        ).magnitude();
+                if( DistanceFromCursor < messageClickAreaRadius )
                 {
                     timeSinceClick = messageTime;
                     text = quoteGen.quoteGrab();
                     System.out.println( "Grabbed quote: " + text );
-                }*/
+                }
             }
-            float tempScale = 3;
             if( timeSinceClick-- > 0 )
             {
-                // System.out.println( text );
-                g.scale( tempScale, tempScale );
+                g.scale( textScale, textScale );
                 g.drawString( text, 0, 0 );
-                g.scale( 1.0f / tempScale, 1.0f / tempScale );
+                g.scale( 1.0f / textScale, 1.0f / textScale );
             }
         }
     }

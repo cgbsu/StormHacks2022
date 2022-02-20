@@ -18,6 +18,10 @@ public class Vector2
         return Math.hypot( ( double ) x, ( double ) y );
     }
 
+    public Vector2 negate() {
+        return new Vector2( -x, -y );
+    }
+
     public String toString() {
         return "Vector2< " + x + ", " + y + " >";
     }
