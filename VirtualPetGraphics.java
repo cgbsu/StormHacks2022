@@ -42,6 +42,7 @@ class VirtualPetGraphics extends JPanel implements MouseListener
     public void paintComponent( Graphics g )
     {
         calculateDeltaTime();
+        Animation.AnimIterate();
 
         super.paintComponent( g );
         g.setColor( backroundColor );
