@@ -9,22 +9,18 @@ public abstract class Animation
     // to avoid bloating the paintComponent method
     public static void AnimIterate()
     {
-        if (PlayingAnimations.size() == 0)
+        if( PlayingAnimations.size() == 0 )
             return;
 
-        for (Animation anim : PlayingAnimations)
-        {
-            anim.OnUpdate(ToolSet.deltaTime * anim.speed());
-        }
+        for( Animation anim : PlayingAnimations )
+            anim.OnUpdate(ToolSet.deltaTime);
     }
 
-    public void Play()
-    {
+    public void Play() {
         PlayingAnimations.add(this);
     }
 
-    public void Pause()
-    {
+    public void Pause() {
         PlayingAnimations.remove(this);
     }
 

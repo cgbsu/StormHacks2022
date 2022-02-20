@@ -272,9 +272,13 @@ public class Doggo
                 new Vector2( ( int ) bodyRadius * 3 / 5, 0 ), 
                 window 
             );
-        this.obj.getChildByName( "BigBrain" ).addChild(this.textBox);
+        BigBrain head = ( BigBrain ) this.obj.getChildByName( "BigBrain" );
+        head.addChild(this.textBox);
+        EarWiggle test = new EarWiggle( 
+                ( Ear ) head.getChildByName( "LEFT.Ear" ), 
+                ( Ear ) head.getChildByName( "RIGHT.Ear" ) 
+            );
         TransformStack.pushTransform( this.obj );
-
         vpg = window;
     }
     

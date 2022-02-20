@@ -90,7 +90,7 @@ public abstract class Transform
     {
         for ( Transform child : children )
         {
-            if (child.name().compareTo( name ) == 0)
+            if (child.toString().compareTo( name ) == 0)
                 return child;
 
             Transform littleBoy = child.getChildByName(name);
