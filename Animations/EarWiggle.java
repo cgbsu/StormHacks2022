@@ -17,6 +17,28 @@ public class EarWiggle extends Animation
         Play();
     }
 
+    public void initalizeEarPositions()
+    {
+        this.left.position.x = ( -this.left.earLength / 2 ) - this.left.earRadius / 2;
+        this.right.position.x = this.right.earRadius / 2;
+        this.left.position.y = 0;
+        this.right.position.y = this.right.earRadius / 2;
+        this.left.center = new Vector2( this.left.earLength, 0 );
+        this.right.center = new Vector2( this.right.earLength, 0 );
+    }
+
+    public void Play() {
+        super.Play();
+        initalizeEarPositions();
+    }
+
+    public void Pause()
+    {
+        super.Pause();
+        this.left.initalize();
+        this.right.initalize();
+    }
+
     public EarWiggle( Doggo.Ear left, Doggo.Ear right, float maxTime ) {
         initalize( left, right, maxTime );
     }
@@ -30,7 +52,7 @@ public class EarWiggle extends Animation
     }
     public float speed()
     {
-        return 1.0f;
+        return 10.0f;
     }
 
     public void OnUpdate( float deltaTime )
@@ -40,9 +62,13 @@ public class EarWiggle extends Animation
         // 
         // left.ThisTranslate( ( originalAngle - left.orientation ), speed() * deltaTime );
         //right.ThisTranslate( Math.sin(time * 3) * 4, deltaTime );
-        right.orientation = ( float ) (Math.sin(time * 3.0f) * 0.2f) + 180;//( float ) (Math.PI + ( Math.PI / 2.0f ) );//270;
+        right.orientation = ( float ) (Math.sin(speed() * time * 3.0f) * 0.2f) + 180;//( float ) (Math.PI + ( Math.PI / 2.0f ) );//270;
         left.orientation = -right.orientation + ( float ) Math.PI ;
-        //if (time >= 0.5f)
-        //    this.Pause();
+        if (time >= 2)
+        {
+            this.Pause();
+            time = 0f;
+        }
+            
     }
 }

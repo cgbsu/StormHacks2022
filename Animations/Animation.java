@@ -12,8 +12,16 @@ public abstract class Animation
         if( PlayingAnimations.size() == 0 )
             return;
 
-        for( Animation anim : PlayingAnimations )
-            anim.OnUpdate(ToolSet.deltaTime);
+        int lastSize = PlayingAnimations.size();
+        for( int i = 0; i < lastSize; ++i )
+        {
+            PlayingAnimations.get( i ).OnUpdate(ToolSet.deltaTime);
+            int nextSize = PlayingAnimations.size();
+            if( nextSize != lastSize ) {
+                --i;
+                lastSize = nextSize;
+            }
+        }
     }
 
     public void Play() {

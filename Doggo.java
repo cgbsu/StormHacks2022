@@ -175,6 +175,8 @@ public class Doggo
     public class Ear extends Bone
     {
         int bodyRadius, earLength, earRadius, headRadius, horizontalScalar, isRight;
+        public Vector2 center;
+
         Ear( double bodyRadius, Bone.BodyHorizontal horizontal )
         {
             super( null );
@@ -185,10 +187,17 @@ public class Doggo
             earRadius = this.bodyRadius * 2 / 10;
             horizontalScalar = leftRightScalar( this.horizontal );
             isRight = ( horizontalScalar + 1 ) / 2;
-            position.x = ( ( -1 + isRight ) * earLength / 2 ) + horizontalScalar * earRadius / 2;//( horizontalScalar * headRadius / 3 ) + ( earRadius )
-            position.y = isRight * earRadius / 2;
-            //( horizontalScalar * headRadius / 3 ) + ( earRadius );
+            initalize();
         }
+
+        public void initalize()
+        {
+            position.y = earRadius / 2;
+            position.x = ( horizontalScalar * headRadius / 3 ) + earRadius + ( horizontalScalar * earRadius / 2 );
+            orientation = ( float ) ( Math.PI / 4.0f ) * ( float ) horizontalScalar;
+            center = new Vector2( earLength / 2, earRadius / 2 );
+        }
+
         public void draw( Graphics2D g )
         {
             g.setColor( Color.GREEN );
@@ -198,8 +207,7 @@ public class Doggo
             return "Ear";
         }
         public Vector2 getAlignedCenter() {
-            return new Vector2( earLength, 0 );//earRadius / 2 );
-            //return new Vector2( earLength / 2, earRadius / 2 );
+            return center;
         }
     }
     
