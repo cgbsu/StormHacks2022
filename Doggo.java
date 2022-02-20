@@ -15,6 +15,7 @@ public class Doggo
 
     EarWiggle earWiggleAnimation;
     WiggleArms wiggleArms;
+    DoABarrelRoll doABarrelRoll;
 
     public VirtualPetGraphics vpg;
 
@@ -141,7 +142,13 @@ public class Doggo
                 if( DistanceFromCursor < messageClickAreaRadius )
                 {
                     timeSinceClick = messageDisplayTimeInMilliseconds;
-                    text = quoteGen.quoteGrab();
+                    if( window.treats.treat.active == true ) {
+                        text = new String[] { "Arf! Arf! Yum Yum Yum thank you!" };
+                        window.treats.treat.active = false;
+                        doABarrelRoll.Play();
+                    }
+                    else
+                        text = quoteGen.quoteGrab();
                     earWiggleAnimation.Play();
                 }
             }
@@ -320,8 +327,9 @@ public class Doggo
                 ( TopLeg ) obj.getChildByName( "LEFT.Doggo_TopLeg" ), 
                 ( TopLeg ) obj.getChildByName( "RIGHT.Doggo_TopLeg" ) 
             );
+        doABarrelRoll = new DoABarrelRoll(this.obj);
         animations = new Animation[] { wiggleArms, earWiggleAnimation, 
-            new HeadNod(head), new HeadCircle(head), new DoABarrelRoll(this.obj) };
+            new HeadNod(head), new HeadCircle(head), doABarrelRoll };
 
         TransformStack.pushTransform( this.obj );
             vpg = window;
@@ -337,6 +345,6 @@ public class Doggo
             return;
 
         timer = 30 + rIsForRandom.nextInt(30);
-        animations[rIsForRandom.nextInt(3)].Play();
+        animations[rIsForRandom.nextInt(animations.length - 1)].Play();
     }
 }
