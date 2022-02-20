@@ -106,7 +106,7 @@ public class Doggo
             this.messageDisplayTimeInMilliseconds = messageDisplayTimeInMilliseconds;
             this.textScale = textScale;
             this.messageClickAreaRadius = messageClickAreaRadius;
-            text = "Test text";
+            text = "If your seeing this... its probably a bug.";
             this.window = window;
             this.position = position;
         }
@@ -154,10 +154,10 @@ public class Doggo
             this.bodyRadius = ( int ) bodyRadius;
             horizontalScalar = ( 1 + leftRightScalar( this.horizontal ) ) / 2;
             legRadius = ( int ) this.bodyRadius / 2;
-            position.x = ( horizontalScalar * this.bodyRadius )//; 
-            - ( horizontalScalar * legRadius )//; 
+            position.x = ( horizontalScalar * this.bodyRadius ) 
+            - ( horizontalScalar * legRadius ) 
             + ( leftRightScalar( this.horizontal ) * legRadius / 2 );
-            position.y = this.bodyRadius - legRadius;//0;//( legRadius / 2 );        
+            position.y = this.bodyRadius - legRadius;        
         }    
         
         public void draw( Graphics2D g )
