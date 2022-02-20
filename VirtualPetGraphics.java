@@ -52,7 +52,6 @@ class VirtualPetGraphics extends JPanel implements MouseListener
     @Override
     public void mouseClicked( MouseEvent e )
     {
-        System.out.println( "AAAA" );
         mouseX = e.getX();
         mouseY = e.getY();
         System.out.print( mouseX );System.out.print( ", " );System.out.println( mouseY );
