@@ -16,6 +16,7 @@ class VirtualPetGraphics extends JPanel implements MouseListener
 
     Clock cluck = Clock.systemDefaultZone();
     long lastFrameMillis = cluck.millis();
+    long lastClickMillis = cluck.millis();
     public float deltaTime = 0f;
 
     int frameDelay = 0;
@@ -91,8 +92,10 @@ class VirtualPetGraphics extends JPanel implements MouseListener
 
     protected void collectMouseInfo( MouseEvent event, String source )
     {
-        if( calculateDeltaTime() >= 1000 )
+        long currentTime = cluck.millis();
+        if( ( currentTime - lastClickMillis ) >= 1000 )
         {
+            lastClickMillis = currentTime;
             mouseClickCoordinates.x = event.getX();
             mouseClickCoordinates.y = event.getY();
             System.out.println( "Mouse " + source + " Detected!: " + mouseClickCoordinates.toString() );

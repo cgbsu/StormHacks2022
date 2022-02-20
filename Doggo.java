@@ -76,7 +76,7 @@ public class Doggo
                 messageClickAreaRadius;
         HappyQuotes quoteGen = new HappyQuotes();
         
-        public static final int DefaultTextScaleFinal = 3;
+        public static final int DefaultTextScaleFinal = 2;
         public static final int DefaultMessageDisplayTimeInMilliseciondsFinal = 3000;
 
         DoggoTextBox( 
