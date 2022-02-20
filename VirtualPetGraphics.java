@@ -16,11 +16,12 @@ class VirtualPetGraphics extends JPanel implements MouseListener
 
     Clock cluck = Clock.systemDefaultZone();
     long lastFrameMillis = cluck.millis();
+    public float deltaTime = 0f;
 
     int frameDelay = 0;
 
 
-    public static Color COMMUNISM = Color.RED;
+    public static Color COMMUNISM = Color.WHITE;
 
     Color backroundColor = COMMUNISM;
 
@@ -29,8 +30,7 @@ class VirtualPetGraphics extends JPanel implements MouseListener
     Vector2 mouseClickCoordinates;
     boolean clicked = false;
 
-    public VirtualPetGraphics()
-    {
+    public VirtualPetGraphics() {
         super();
         this.doggo = new Doggo( null, this );
         setBackground( backroundColor );
@@ -60,7 +60,7 @@ class VirtualPetGraphics extends JPanel implements MouseListener
         g.fillRect( 200, 200, 100, 100 );*/
 
         int targetDeltaMilli = 1000 / 60;
-        int deFloatDeltaTime = (int)(ToolSet.deltaTime * 1000);
+        int deFloatDeltaTime = (int)(deltaTime * 1000);
 
         if (deFloatDeltaTime > targetDeltaMilli && frameDelay > 0)
             frameDelay--;
@@ -76,25 +76,34 @@ class VirtualPetGraphics extends JPanel implements MouseListener
         }
     }
 
-    void calculateDeltaTime()
+    double calculateDeltaTime()
     {
         long currentMillis = cluck.millis();
 
         long deltaTimeLong = currentMillis - lastFrameMillis; 
 
-        ToolSet.deltaTime = (float)deltaTimeLong * 0.001f;
+        deltaTime = (float) deltaTimeLong * 0.001f;
 
         lastFrameMillis = currentMillis;
+
+        return deltaTime;
+    }
+
+    protected void collectMouseInfo( MouseEvent event, String source )
+    {
+        if( calculateDeltaTime() >= 1000 )
+        {
+            mouseClickCoordinates.x = event.getX();
+            mouseClickCoordinates.y = event.getY();
+            System.out.println( "Mouse " + source + " Detected!: " + mouseClickCoordinates.toString() );
+            clicked = true;
+            repaint();
+        }
     }
 
     @Override
-    public void mouseClicked( MouseEvent e )
-    {
-        mouseClickCoordinates.x = e.getX();
-        mouseClickCoordinates.y = e.getY();
-        System.out.println( "Mouse Click Detected!: " + mouseClickCoordinates.toString() );
-        clicked = true;
-        repaint();
+    public void mouseClicked( MouseEvent e ) {
+        collectMouseInfo( e, "Click" );
     }
     @Override
     public void mouseExited( MouseEvent e ) {
@@ -110,6 +119,6 @@ class VirtualPetGraphics extends JPanel implements MouseListener
     }
     @Override
     public void mousePressed( MouseEvent e ) {
-        // clicked = false;
+        collectMouseInfo( e, "Pressed" );
     }
  }
