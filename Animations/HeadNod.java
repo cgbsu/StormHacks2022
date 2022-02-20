@@ -26,6 +26,8 @@ public class HeadNod extends Animation
         {
             this.Pause();
             time = 0f;
+
+            head.position = defaultPosition;
         }
     }
 }

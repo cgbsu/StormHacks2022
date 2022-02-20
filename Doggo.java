@@ -321,7 +321,7 @@ public class Doggo
                 ( TopLeg ) obj.getChildByName( "RIGHT.Doggo_TopLeg" ) 
             );
         animations = new Animation[] { wiggleArms, earWiggleAnimation, 
-            new HeadNod(head), new HeadCircle(head) };
+            new HeadNod(head), new HeadCircle(head), new DoABarrelRoll(this.obj) };
 
         TransformStack.pushTransform( this.obj );
             vpg = window;

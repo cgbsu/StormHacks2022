@@ -23,15 +23,19 @@ public class TransformStack
     static void renderTransform( Graphics2D g, Transform current )
     {
         // System.out.println( "<renderTransform " + current.name() + ">" );
-        g.translate( current.position.x, current.position.y );
-        g.rotate( current.orientation, current.getAlignedCenter().x, current.getAlignedCenter().y );
+        Vector2 oldCenter = current.getAlignedCenter();
+        oldCenter = new Vector2( oldCenter.x, oldCenter.y );
+        Vector2 oldPosition = new Vector2( current.position.x, current.position.y );
+        double oldOrientation = current.orientation;
+        g.translate( oldPosition.x, oldPosition.y );
+        g.rotate( oldOrientation, oldCenter.x, oldCenter.y );
         current.draw( g );
         if( current.children != null ) {
             for( Transform child : current.children )
                 renderTransform( g, child );
         }
-        g.rotate( -current.orientation, current.getAlignedCenter().x, current.getAlignedCenter().y );
-        g.translate( -current.position.x, -current.position.y );
+        g.rotate( -oldOrientation, oldCenter.x, oldCenter.y );
+        g.translate( -oldPosition.x, -oldPosition.y );
         previouslyUsedGraphics2D = g;
         // System.out.println( "</renderTransform " + current.name() + ">" );
     }
