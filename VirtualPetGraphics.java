@@ -16,11 +16,8 @@ class VirtualPetGraphics extends JPanel implements MouseListener
 
     Clock cluck = Clock.systemDefaultZone();
     long lastFrameMillis = cluck.millis();
-<<<<<<< HEAD
     long lastClickMillis = cluck.millis();
     public float deltaTime = 0f;
-=======
->>>>>>> e0883bbfc41705e186aceb9a344b5da6b3e720ee
 
     int frameDelay = 0;
 
